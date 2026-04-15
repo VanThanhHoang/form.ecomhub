@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Thu Thập Thông Tin – Thuận Hương × Ecom Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A3C5E;
+            --secondary: #2874A6;
+            --accent: #E74C3C;
+            --green: #27AE60;
+            --orange: #E67E22;
+            --bg: #F8F9FA;
+            --card: #FFFFFF;
+            --text: #2C3E50;
+            --muted: #7F8C8D;
+            --border: #E0E3E6;
+            --ch1-bg: #EBF5FB;
+            --ch1-border: #2874A6;
+            --ch2-bg: #E8F8F5;
+            --ch2-border: #27AE60;
+            --ch3-bg: #FEF9E7;
+            --ch3-border: #E67E22;
+            --ch4-bg: #FDEDEC;
+            --ch4-border: #E74C3C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .header p { font-size: 14px; opacity: 0.85; }
+
+        .intro-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .intro-card h2 { font-size: 16px; color: var(--secondary); margin-bottom: 8px; }
+        .intro-card p { font-size: 14px; color: var(--muted); }
+
+        .section {
+            background: var(--card);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .section-header:hover { opacity: 0.9; }
+
+        .section-header .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .section-header .info { flex: 1; }
+        .section-header .info h3 { font-size: 15px; font-weight: 600; }
+        .section-header .info span { font-size: 12px; opacity: 0.7; }
+
+        .section-header .toggle {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .section-header .toggle.open { transform: rotate(180deg); }
+
+        .section-body { padding: 0 20px 20px; }
+
+        .field { margin-bottom: 16px; }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .field label .required { color: var(--accent); }
+
+        .field label .hint {
+            font-weight: 400;
+            color: var(--muted);
+            font-size: 12px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .field textarea,
+        .field input[type="text"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text);
+            background: var(--bg);
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+
+        .field textarea:focus,
+        .field input[type="text"]:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: white;
+        }
+
+        .field textarea { min-height: 80px; }
+
+        /* Channel section headers */
+        .channel-section .section-header.ch1 { background: var(--ch1-bg); border-left: 4px solid var(--ch1-border); }
+        .channel-section .section-header.ch2 { background: var(--ch2-bg); border-left: 4px solid var(--ch2-border); }
+        .channel-section .section-header.ch3 { background: var(--ch3-bg); border-left: 4px solid var(--ch3-border); }
+        .channel-section .section-header.ch4 { background: var(--ch4-bg); border-left: 4px solid var(--ch4-border); }
+
+        .channel-section .icon.ch1 { background: var(--ch1-border); color: white; }
+        .channel-section .icon.ch2 { background: var(--ch2-border); color: white; }
+        .channel-section .icon.ch3 { background: var(--ch3-border); color: white; }
+        .channel-section .icon.ch4 { background: var(--ch4-border); color: white; }
+
+        .divider {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin: 28px 0 16px;
+            font-weight: 500;
+        }
+
+        .btn-export {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-export:hover { opacity: 0.9; }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .checklist { margin-top: 8px; }
+
+        .checklist label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 4px 0;
+            cursor: pointer;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .product-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .product-chip.selected {
+            border-color: var(--secondary);
+            background: var(--ch1-bg);
+        }
+
+        .product-chip input { display: none; }
+
+        /* Output area */
+        #output {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--secondary);
+        }
+
+        #output h3 { color: var(--secondary); margin-bottom: 12px; }
+
+        #outputText {
+            white-space: pre-wrap;
+            font-family: inherit;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .btn-copy {
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-copy:hover { opacity: 0.9; }
+
+        /* Progress bar */
+        .progress-bar-wrap {
+            background: var(--border);
+            border-radius: 99px;
+            height: 6px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--green));
+            border-radius: 99px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>📋 Form Thu Thập Thông Tin</h1>
+            <p>Thuận Hương Chips × Ecom Hub – Chuẩn bị sản xuất AI Video</p>
+        </div>
+
+        <div class="intro-card">
+            <h2>📌 Mục đích</h2>
+            <p>Form này giúp Ecom Hub thu thập đầy đủ thông tin từ Thuận Hương để bắt đầu viết kịch bản video cho 4 kênh vệ tinh. Chị An, Yến, và Đoan vui lòng điền theo kênh mình phụ trách.</p>
+        </div>
+
+        <div class="progress-label" id="progressLabel">Tiến độ: 0%</div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+
+        <!-- ===== PHẦN A: THÔNG TIN CHUNG ===== -->
+        <div class="section" data-section="A">
+            <div class="section-header open" onclick="toggleSection(this)" style="background: #F4F6F7; border-left: 4px solid var(--primary);">
+                <div class="icon" style="background: var(--primary); color: white;">A</div>
+                <div class="info">
+                    <h3 style="color: var(--primary);">Thông tin chung về thương hiệu & sản phẩm</h3>
+                    <span>Áp dụng cho tất cả 4 kênh – Chị An điền</span>
+                </div>
+                <div class="toggle open">▼</div>
+            </div>
+            <div class="section-body">
+
+                <div class="field" data-field="Sản phẩm chủ lực">
+                    <label>1. Sản phẩm chủ lực muốn đẩy mạnh trên TikTokShop <span class="required">*</span>
+                        <span class="hint">Tick chọn các sản phẩm ưu tiên. Nếu có sản phẩm khác, ghi thêm bên dưới.</span>
+                    </label>
+                    <div class="product-grid" id="products"></div>
+                    <input type="text" placeholder="Sản phẩm khác (nếu có)..." style="margin-top: 8px;" id="other_products">
+                </div>
+
+                <div class="field" data-field="Top sản phẩm bán chạy">
+                    <label>2. Top 3-5 sản phẩm bán chạy nhất hiện tại <span class="required">*</span>
+                        <span class="hint">Xếp theo thứ tự doanh thu. Ghi kèm giá bán lẻ nếu tiện.</span>
+                    </label>
+                    <textarea placeholder="VD: 1. Mít sấy giòn 100g – 27K&#10;2. Trái cây thập cẩm 150g – 31.8K&#10;3. Xoài sấy dẻo 200g – 45K"></textarea>
+                </div>
+
+                <div class="field" data-field="Sản phẩm mới / test">
+                    <label>3. Sản phẩm mới hoặc sản phẩm muốn test trên TikTok
+                        <span class="hint">Sản phẩm chưa bán nhiều nhưng muốn thử trên kênh online.</span>
+                    </label>
+                    <textarea placeholder="VD: Hạt sen sấy, Rau củ sấy cao cấp, Combo quà tặng..."></textarea>
+                </div>
+
+                <div class="field" data-field="USP – Điểm bán hàng độc nhất">
+                    <label>4. USP (Điểm bán hàng độc nhất) của Thuận Hương <span class="required">*</span>
+                        <span class="hint">Liệt kê những gì khiến Thuận Hương khác biệt so với đối thủ.</span>
+                    </label>
+                    <textarea placeholder="VD: 100% tự nhiên, không đường, không bảo quản, ISO/FDA/HALAL, nhà máy ngay vùng trồng..."></textarea>
+                </div>
+
+                <div class="field" data-field="Khách hàng mục tiêu">
+                    <label>5. Khách hàng mục tiêu chính trên TikTok <span class="required">*</span>
+                        <span class="hint">Ai là người sẽ xem video và mua hàng? Mô tả càng cụ thể càng tốt.</span>
+                    </label>
+                    <textarea placeholder="VD: Nữ 20-35 tuổi, văn phòng, quan tâm sức khỏe, hay mua snack online. Mẹ bỉm sữa tìm đồ ăn vặt lành mạnh cho con..."></textarea>
+                </div>
+
+                <div class="field" data-field="Chương trình khuyến mãi">
+                    <label>6. Chương trình khuyến mãi / deal hiện tại
+                        <span class="hint">Voucher, combo, freeship, mua X tặng Y... để đưa vào CTA trong video.</span>
+                    </label>
+                    <textarea placeholder="VD: Freeship cho đơn từ 50K, Combo 5 loại 99K, Mua 2 giảm 10%..."></textarea>
+                </div>
+
+                <div class="field" data-field="Nội dung cần tránh">
+                    <label>7. Những điều KHÔNG ĐƯỢC nói / nội dung cần tránh
+                        <span class="hint">Thông tin nhạy cảm, cam kết sai, so sánh với brand cụ thể, từ ngữ cấm...</span>
+                    </label>
+                    <textarea placeholder="VD: Không nói 'trị bệnh', không so sánh với brand A/B, không dùng hình ảnh chưa được duyệt..."></textarea>
+                </div>
+
+                <div class="field" data-field="Tone giọng & phong cách">
+                    <label>8. Tone giọng & phong cách mong muốn cho video <span class="required">*</span>
+                        <span class="hint">Avatar sẽ nói theo phong cách nào?</span>
+                    </label>
+                    <div class="checklist">
+                        <label><input type="checkbox" value="Thân thiện, gần gũi (như bạn bè chia sẻ)"> Thân thiện, gần gũi (như bạn bè chia sẻ)</label>
+                        <label><input type="checkbox" value="Chuyên gia (đáng tin, có kiến thức)"> Chuyên gia (đáng tin, có kiến thức)</label>
+                        <label><input type="checkbox" value="Vui nhộn, hài hước"> Vui nhộn, hài hước</label>
+                        <label><input type="checkbox" value="Trẻ trung, năng động (Gen Z)"> Trẻ trung, năng động (Gen Z)</label>
+                        <label><input type="checkbox" value="Truyền cảm hứng (câu chuyện, cảm xúc)"> Truyền cảm hứng (câu chuyện, cảm xúc)</label>
+                    </div>
+                    <input type="text" placeholder="Phong cách khác (nếu có)..." style="margin-top: 8px;">
+                </div>
+
+                <div class="field" data-field="Hình ảnh / footage đã có">
+                    <label>9. Hình ảnh / footage đã có sẵn
+                        <span class="hint">Tick những gì Thuận Hương đã có. Ecom Hub sẽ request thêm nếu cần.</span>
+                    </label>
+                    <div class="checklist">
+                        <label><input type="checkbox" value="Hình sản phẩm nền trắng (packshot)"> Hình sản phẩm nền trắng (packshot)</label>
+                        <label><input type="checkbox" value="Hình sản phẩm lifestyle (đang ăn, bày biện)"> Hình sản phẩm lifestyle (đang ăn, bày biện)</label>
+                        <label><input type="checkbox" value="Video/hình nhà máy sản xuất"> Video/hình nhà máy sản xuất</label>
+                        <label><input type="checkbox" value="Video/hình vườn nguyên liệu (mít, xoài...)"> Video/hình vườn nguyên liệu (mít, xoài...)</label>
+                        <label><input type="checkbox" value="Video/hình quy trình sản xuất (sấy, đóng gói)"> Video/hình quy trình sản xuất (sấy, đóng gói)</label>
+                        <label><input type="checkbox" value="Hình chứng nhận (ISO, FDA, HALAL, OCOP)"> Hình chứng nhận (ISO, FDA, HALAL, OCOP)</label>
+                        <label><input type="checkbox" value="Hình nhân vật hoạt hình trái cây (mascot)"> Hình nhân vật hoạt hình trái cây (mascot)</label>
+                        <label><input type="checkbox" value="Logo vector (file gốc)"> Logo vector (file gốc)</label>
+                    </div>
+                </div>
+
+                <div class="field" data-field="Link TikTokShop & kênh">
+                    <label>10. Link TikTokShop & các tài khoản kênh
+                        <span class="hint">Link gian hàng TikTokShop + link 4 kênh TikTok vệ tinh (nếu đã setup).</span>
+                    </label>
+                    <textarea placeholder="TikTokShop: https://...&#10;Kênh 1 (Healthy): https://...&#10;Kênh 2 (Vùng Miền): https://...&#10;Kênh 3 (Review): https://...&#10;Kênh 4 (Hề hước): https://..."></textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="divider">── THÔNG TIN RIÊNG TỪNG KÊNH ──</div>
+
+        <!-- ===== KÊNH 1: HEALTHY ===== -->
+        <div class="section channel-section" data-section="Kênh 1">
+            <div class="section-header ch1" onclick="toggleSection(this)">
+                <div class="icon ch1">🥗</div>
+                <div class="info">
+                    <h3>Kênh 1: Healthy Snack</h3>
+                    <span>Phụ trách: Chị Yến</span>
+                </div>
+                <div class="toggle">▼</div>
+            </div>
+            <div class="section-body" style="display:none;">
+                <div class="field" data-field="Thông điệp sức khỏe chính">
+                    <label>Thông điệp sức khỏe chính muốn truyền tải <span class="required">*</span>
+                        <span class="hint">Ăn sạch, không đường, eat clean, ăn kiêng, phù hợp trẻ em...</span>
+                    </label>
+                    <textarea placeholder="VD: Snack lành mạnh không đường, không chất bảo quản, phù hợp người ăn kiêng và trẻ em..."></textarea>
+                </div>
+                <div class="field" data-field="Nhóm khách hàng Healthy">
+                    <label>Nhóm khách hàng ưu tiên cho kênh Healthy
+                        <span class="hint">Người ăn kiêng, gym-goers, mẹ bỉm sữa, người tiểu đường...</span>
+                    </label>
+                    <div class="checklist">
+                        <label><input type="checkbox" value="Người ăn kiêng / giảm cân"> Người ăn kiêng / giảm cân</label>
+                        <label><input type="checkbox" value="Gym-goers / thể thao"> Gym-goers / thể thao</label>
+                        <label><input type="checkbox" value="Mẹ bỉm sữa / trẻ em"> Mẹ bỉm sữa / trẻ em</label>
+                        <label><input type="checkbox" value="Người tiểu đường / bệnh nhân"> Người tiểu đường / bệnh nhân</label>
+                        <label><input type="checkbox" value="Dân văn phòng ăn vặt lành mạnh"> Dân văn phòng ăn vặt lành mạnh</label>
+                    </div>
+                </div>
+                <div class="field" data-field="Chứng nhận & chất lượng">
+                    <label>Chứng nhận & thông tin chất lượng nổi bật
+                        <span class="hint">ISO, FDA, HALAL, OCOP, không đường, không phẩm màu, % dinh dưỡng...</span>
+                    </label>
+                    <textarea placeholder="VD: Chứng nhận ISO 22000, FDA Hoa Kỳ, HALAL. 0% đường tinh luyện. Giữ nguyên 85% dưỡng chất..."></textarea>
+                </div>
+                <div class="field" data-field="Hook / mở đầu Healthy">
+                    <label>Ý tưởng mở đầu video (hook) cho kênh Healthy
+                        <span class="hint">Câu hỏi, tình huống, hoặc thống kê gây chú ý ngay 3 giây đầu.</span>
+                    </label>
+                    <textarea placeholder="VD: 'Bạn có biết 1 gói snack thông thường chứa bao nhiêu đường?', 'Ăn vặt mà không lo tăng cân – có thật không?'..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KÊNH 2: VÙNG MIỀN ===== -->
+        <div class="section channel-section" data-section="Kênh 2">
+            <div class="section-header ch2" onclick="toggleSection(this)">
+                <div class="icon ch2">🗺️</div>
+                <div class="info">
+                    <h3>Kênh 2: Đặc Sản Vùng Miền</h3>
+                    <span>Phụ trách: Chị Yến</span>
+                </div>
+                <div class="toggle">▼</div>
+            </div>
+            <div class="section-body" style="display:none;">
+                <div class="field" data-field="Vùng nguyên liệu">
+                    <label>Vùng nguyên liệu & câu chuyện xuất xứ <span class="required">*</span>
+                        <span class="hint">Mít từ đâu? Xoài từ tỉnh nào? Nông dân địa phương? Câu chuyện vùng trồng.</span>
+                    </label>
+                    <textarea placeholder="VD: Mít từ vườn Tiền Giang, xoài Đồng Tháp, khoai lang Vĩnh Long. Hợp tác trực tiếp với 50+ hộ nông dân..."></textarea>
+                </div>
+                <div class="field" data-field="Nét đặc trưng vùng miền">
+                    <label>Nét đặc trưng / tự hào địa phương muốn nhấn mạnh
+                        <span class="hint">Đặc sản nổi tiếng, địa danh, mùa thu hoạch, phong tục...</span>
+                    </label>
+                    <textarea placeholder="VD: Mít Tố Nữ Tiền Giang ngọt tự nhiên không cần thêm đường. Xoài cát Hòa Lộc – đặc sản số 1 miền Tây..."></textarea>
+                </div>
+                <div class="field" data-field="Câu chuyện thương hiệu">
+                    <label>Câu chuyện thương hiệu / người sáng lập
+                        <span class="hint">Lịch sử hình thành, sứ mệnh, tại sao làm sản phẩm này.</span>
+                    </label>
+                    <textarea placeholder="VD: Bắt đầu từ năm..., mong muốn đưa nông sản Việt ra thị trường quốc tế, giúp nông dân có thu nhập ổn định..."></textarea>
+                </div>
+                <div class="field" data-field="Sản phẩm đặc trưng kênh vùng miền">
+                    <label>Sản phẩm phù hợp nhất để quảng bá theo góc độ vùng miền
+                        <span class="hint">Sản phẩm nào có câu chuyện xuất xứ hấp dẫn nhất?</span>
+                    </label>
+                    <textarea placeholder="VD: Mít sấy giòn (Tiền Giang), Xoài sấy dẻo (Đồng Tháp), Khoai lang sấy (Vĩnh Long)..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KÊNH 3: REVIEW ===== -->
+        <div class="section channel-section" data-section="Kênh 3">
+            <div class="section-header ch3" onclick="toggleSection(this)">
+                <div class="icon ch3">⭐</div>
+                <div class="info">
+                    <h3>Kênh 3: Review & Unbox</h3>
+                    <span>Phụ trách: Đoan</span>
+                </div>
+                <div class="toggle">▼</div>
+            </div>
+            <div class="section-body" style="display:none;">
+                <div class="field" data-field="Bảng giá chi tiết SKU">
+                    <label>Bảng giá chi tiết tất cả SKU trên TikTokShop <span class="required">*</span>
+                        <span class="hint">Tên SP – Trọng lượng – Giá bán – Giá khuyến mãi (nếu có).</span>
+                    </label>
+                    <textarea style="min-height: 120px;" placeholder="VD:&#10;Mít sấy giòn 100g – 27K&#10;Mít sấy giòn 500g – 90K&#10;Trái cây thập cẩm 150g – 31.8K&#10;Xoài sấy dẻo 200g – 45K&#10;..."></textarea>
+                </div>
+                <div class="field" data-field="Combo / bundle">
+                    <label>Combo / bundle đang bán hoặc muốn tạo
+                        <span class="hint">Combo nào đang chạy tốt? Muốn tạo combo mới nào?</span>
+                    </label>
+                    <textarea placeholder="VD: Combo 5 loại sấy 99K, Combo quà tặng Tết 199K, Combo văn phòng 3 túi 69K..."></textarea>
+                </div>
+                <div class="field" data-field="Review thật từ khách hàng">
+                    <label>Review / feedback thật từ khách hàng
+                        <span class="hint">Screenshot review tốt trên Shopee/TikTokShop, hoặc ghi lại nội dung review.</span>
+                    </label>
+                    <textarea placeholder="VD: 'Giòn tan, ăn mãi không ngán' – KH Shopee. 'Mít sấy ngon nhất từng ăn, giá rẻ nữa' – KH TikTokShop."></textarea>
+                </div>
+                <div class="field" data-field="Đối thủ cạnh tranh">
+                    <label>Đối thủ cạnh tranh trên TikTokShop
+                        <span class="hint">Tên brand, giá bán, điểm yếu của họ mà TH có thể so sánh.</span>
+                    </label>
+                    <textarea placeholder="VD: Brand A – mít sấy 50K/100g nhưng có đường. Brand B – chuối sấy 35K nhưng không có chứng nhận..."></textarea>
+                </div>
+                <div class="field" data-field="Điểm nổi bật khi unbox">
+                    <label>Điểm nổi bật khi unbox / mở gói sản phẩm
+                        <span class="hint">Bao bì, mùi hương, màu sắc, âm thanh giòn rụm... chi tiết tạo WOW khi quay video.</span>
+                    </label>
+                    <textarea placeholder="VD: Bao bì zip-lock tiện lợi, mở ra thơm ngay, màu vàng tự nhiên đẹp mắt, tiếng giòn rụm khi bẻ..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KÊNH 4: HỀ HƯỚC ===== -->
+        <div class="section channel-section" data-section="Kênh 4">
+            <div class="section-header ch4" onclick="toggleSection(this)">
+                <div class="icon ch4">😂</div>
+                <div class="info">
+                    <h3>Kênh 4: Hề hước Thuận Hương</h3>
+                    <span>Phụ trách: Chị An</span>
+                </div>
+                <div class="toggle">▼</div>
+            </div>
+            <div class="section-body" style="display:none;">
+                <div class="field" data-field="Mascot hoạt hình">
+                    <label>Nhân vật hoạt hình trái cây đã có sẵn chưa? <span class="required">*</span>
+                        <span class="hint">Thuận Hương đã có mascot/nhân vật hoạt hình chưa? Nếu có, mô tả hoặc gửi hình.</span>
+                    </label>
+                    <textarea placeholder="VD: Đã có mascot mít, chuối trên bao bì. Hoặc: Chưa có, cần Ecom Hub thiết kế."></textarea>
+                </div>
+                <div class="field" data-field="Nhân vật trái cây muốn làm">
+                    <label>Những loại trái cây muốn làm nhân vật
+                        <span class="hint">Mít, chuối, xoài, khoai lang, hạt sen... Chọn 3-5 nhân vật chính.</span>
+                    </label>
+                    <div class="checklist">
+                        <label><input type="checkbox" value="🟡 Mít (nhân vật chính)"> 🟡 Mít (nhân vật chính?)</label>
+                        <label><input type="checkbox" value="🍌 Chuối"> 🍌 Chuối</label>
+                        <label><input type="checkbox" value="🥭 Xoài"> 🥭 Xoài</label>
+                        <label><input type="checkbox" value="🍠 Khoai lang"> 🍠 Khoai lang</label>
+                        <label><input type="checkbox" value="🥜 Hạt sen"> 🥜 Hạt sen</label>
+                        <label><input type="checkbox" value="🥥 Dừa"> 🥥 Dừa</label>
+                        <label><input type="checkbox" value="🍈 Khoai môn"> 🍈 Khoai môn</label>
+                    </div>
+                </div>
+                <div class="field" data-field="Tính cách nhân vật">
+                    <label>Tính cách mong muốn cho nhân vật
+                        <span class="hint">Mỗi nhân vật có thể có tính cách khác nhau để tạo drama hài.</span>
+                    </label>
+                    <textarea placeholder="VD: Mít – anh cả, mạnh mẽ, hay bảo vệ. Chuối – hài hước, lém lỉnh. Xoài – sang chảnh, điệu đà. Khoai lang – hiền lành, nhút nhát..."></textarea>
+                </div>
+                <div class="field" data-field="Kiểu hài">
+                    <label>Kiểu hài muốn hướng tới
+                        <span class="hint">Để Ecom Hub xây dựng concept phù hợp.</span>
+                    </label>
+                    <div class="checklist">
+                        <label><input type="checkbox" value="Hài tình huống (nhân vật gặp chuyện dở khóc dở cười)"> Hài tình huống (nhân vật gặp chuyện dở khóc dở cười)</label>
+                        <label><input type="checkbox" value="Hài đối thoại (2 nhân vật nói chuyện, châm chọc nhau)"> Hài đối thoại (2 nhân vật nói chuyện, châm chọc nhau)</label>
+                        <label><input type="checkbox" value="Hài trending (bắt trend TikTok theo kiểu hoạt hình)"> Hài trending (bắt trend TikTok theo kiểu hoạt hình)</label>
+                        <label><input type="checkbox" value="Hài giáo dục (vừa vui vừa dạy kiến thức về snack/sức khỏe)"> Hài giáo dục (vừa vui vừa dạy kiến thức về snack/sức khỏe)</label>
+                    </div>
+                </div>
+                <div class="field" data-field="Giới hạn nội dung hài">
+                    <label>Điều gì KHÔNG NÊN đưa vào nội dung hài
+                        <span class="hint">Ranh giới hài hước để không ảnh hưởng hình ảnh thương hiệu.</span>
+                    </label>
+                    <textarea placeholder="VD: Không bạo lực, không chính trị, không châm biếm đối thủ trực tiếp, không nội dung người lớn..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PHẦN B: BỔ SUNG ===== -->
+        <div class="section" data-section="Bổ sung">
+            <div class="section-header" onclick="toggleSection(this)" style="background: #F4F6F7; border-left: 4px solid var(--muted);">
+                <div class="icon" style="background: var(--muted); color: white;">+</div>
+                <div class="info">
+                    <h3 style="color: var(--text);">Thông tin bổ sung</h3>
+                    <span>Bất kỳ ai cũng có thể điền</span>
+                </div>
+                <div class="toggle">▼</div>
+            </div>
+            <div class="section-body" style="display:none;">
+                <div class="field" data-field="Video tham khảo">
+                    <label>Video / kênh TikTok nào team thấy hay và muốn tham khảo?
+                        <span class="hint">Link video hoặc kênh mà Thuận Hương muốn style tương tự.</span>
+                    </label>
+                    <textarea placeholder="Dán link TikTok tham khảo tại đây..."></textarea>
+                </div>
+                <div class="field" data-field="Lịch sự kiện">
+                    <label>Lịch sự kiện / chương trình sắp tới
+                        <span class="hint">Flash sale, ra mắt SP mới, hội chợ, lễ hội... để Ecom Hub chuẩn bị video phù hợp.</span>
+                    </label>
+                    <textarea placeholder="VD: 5/5 sale hè, 15/6 ra mắt SP mới, 9/9 mega sale TikTokShop..."></textarea>
+                </div>
+                <div class="field" data-field="Yêu cầu đặc biệt">
+                    <label>Yêu cầu đặc biệt / ghi chú thêm</label>
+                    <textarea placeholder="Bất kỳ điều gì team muốn Ecom Hub biết thêm..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-export" onclick="exportForm()">📄 Xuất ra văn bản (Copy để gửi)</button>
+
+        <div id="output">
+            <h3>📋 Nội dung đã điền — Copy và gửi qua Zalo/Email</h3>
+            <pre id="outputText"></pre>
+            <button class="btn-copy" onclick="copyOutput()">📋 Copy toàn bộ</button>
+        </div>
+
+        <div class="footer">
+            Ecom Hub × Thuận Hương Chips – Tháng 4/2026
+        </div>
+
+    </div>
+
+    <script>
+        // ── Product chips ──
+        const products = [
+            "Mít sấy giòn", "Chuối sấy giòn", "Khoai lang sấy", "Khoai môn sấy",
+            "Trái cây thập cẩm", "Xoài sấy dẻo", "Xoài sấy giòn", "Thơm sấy",
+            "Hạt sen sấy", "Hạt điều sấy", "Khổ qua sấy", "Đậu bắp sấy",
+            "Cà rốt sấy", "Bí đỏ sấy", "Rau củ thập cẩm", "Chuối sấy dẻo"
+        ];
+
+        const grid = document.getElementById('products');
+        products.forEach(p => {
+            const chip = document.createElement('div');
+            chip.className = 'product-chip';
+            chip.innerHTML = `<input type="checkbox" value="${p}"><span>${p}</span>`;
+            chip.onclick = () => {
+                const cb = chip.querySelector('input');
+                cb.checked = !cb.checked;
+                chip.classList.toggle('selected', cb.checked);
+                updateProgress();
+            };
+            grid.appendChild(chip);
+        });
+
+        // ── Toggle section ──
+        function toggleSection(header) {
+            const body = header.nextElementSibling;
+            const toggle = header.querySelector('.toggle');
+            const isHidden = body.style.display === 'none';
+            body.style.display = isHidden ? 'block' : 'none';
+            toggle.classList.toggle('open', isHidden);
+        }
+
+        // ── Progress bar ──
+        function updateProgress() {
+            const allFields = document.querySelectorAll('.field');
+            let filled = 0;
+
+            allFields.forEach(field => {
+                const ta = field.querySelector('textarea');
+                const inp = field.querySelector('input[type="text"]');
+                const checks = field.querySelectorAll('input[type="checkbox"]:checked');
+                const chips = field.querySelectorAll('.product-chip.selected');
+
+                if ((ta && ta.value.trim()) ||
+                    (inp && inp.value.trim()) ||
+                    checks.length > 0 ||
+                    chips.length > 0) {
+                    filled++;
+                }
+            });
+
+            const pct = Math.round((filled / allFields.length) * 100);
+            document.getElementById('progressBar').style.width = pct + '%';
+            document.getElementById('progressLabel').textContent = `Tiến độ điền form: ${pct}% (${filled}/${allFields.length} mục)`;
+        }
+
+        // Listen to all inputs for progress
+        document.addEventListener('input', updateProgress);
+        document.addEventListener('change', updateProgress);
+
+        // ── Export ──
+        function exportForm() {
+            let text = '═══════════════════════════════════════\n';
+            text += 'FORM THU THẬP THÔNG TIN – THUẬN HƯƠNG\n';
+            text += 'Ecom Hub × Thuận Hương Chips – 4/2026\n';
+            text += '═══════════════════════════════════════\n';
+
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionName = section.querySelector('.section-header h3');
+                if (!sectionName) return;
+
+                text += '\n▶ ' + sectionName.textContent.trim() + '\n';
+                text += '─'.repeat(40) + '\n';
+
+                const fields = section.querySelectorAll('.field');
+                fields.forEach(field => {
+                    const fieldName = field.getAttribute('data-field') || '';
+                    if (!fieldName) return;
+
+                    // Collect values
+                    const ta = field.querySelector('textarea');
+                    const inputs = field.querySelectorAll('input[type="text"]');
+                    const checkboxes = field.querySelectorAll('input[type="checkbox"]:checked');
+                    const chips = field.querySelectorAll('.product-chip.selected input');
+
+                    let parts = [];
+
+                    // Textarea value
+                    if (ta && ta.value.trim()) {
+                        parts.push(ta.value.trim());
+                    }
+
+                    // Text inputs
+                    inputs.forEach(inp => {
+                        if (inp.value.trim()) parts.push(inp.value.trim());
+                    });
+
+                    // Checked checkboxes (excluding chips)
+                    const checkValues = Array.from(checkboxes)
+                        .filter(cb => !cb.closest('.product-chip'))
+                        .map(cb => cb.value || cb.parentElement.textContent.trim())
+                        .filter(Boolean);
+                    if (checkValues.length > 0) {
+                        parts.push(checkValues.join(', '));
+                    }
+
+                    // Product chips
+                    const chipValues = Array.from(chips).map(cb => cb.value).filter(Boolean);
+                    if (chipValues.length > 0) {
+                        parts.push(chipValues.join(', '));
+                    }
+
+                    const value = parts.join('\n').trim();
+                    text += '\n' + fieldName + '\n→ ' + (value || '(chưa điền)') + '\n';
+                });
+            });
+
+            text += '\n═══════════════════════════════════════\n';
+            text += 'Xuất lúc: ' + new Date().toLocaleString('vi-VN') + '\n';
+
+            const output = document.getElementById('output');
+            document.getElementById('outputText').textContent = text;
+            output.style.display = 'block';
+            output.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ── Copy ──
+        function copyOutput() {
+            const text = document.getElementById('outputText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '✅ Đã copy!';
+                setTimeout(() => btn.textContent = '📋 Copy toàn bộ', 2000);
+            }).catch(() => {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '✅ Đã copy!';
+                setTimeout(() => btn.textContent = '📋 Copy toàn bộ', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
